@@ -1,0 +1,15 @@
+extends: "default"
+rules:
+  document-start: "disable"
+  line-length: "disable"
+  truthy:
+    allowed-values: ["true", "false"]
+    check-keys: false
+  quoted-strings:
+    quote-type: "double"
+    required: true
+  comments:
+    min-spaces-from-content: 1
+  indentation:
+    spaces: 2
+    indent-sequences: "consistent"

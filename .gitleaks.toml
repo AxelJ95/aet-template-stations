@@ -1,0 +1,18 @@
+# Secret detection for every repo of the org. Detection only: on the free plan nothing blocks a push,
+# so a finding means the founder replaces the secret at once.
+title = "Agent Ecosystem secret detection"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "signed-link"
+description = "A signed link to a warehouse object. A signed link is never written into a repo or a despatch."
+regex = '''(?i)[?&](?:x-amz-signature|x-goog-signature|sig|signature)=[0-9a-z%/+=_-]{16,}'''
+keywords = ["x-amz-signature", "x-goog-signature", "sig=", "signature="]
+
+[[rules]]
+id = "session-code-or-run-credential"
+description = "A signed session code or run credential pasted into a file."
+regex = '''(?i)\b(?:session[_-]?code|run[_-]?credential)\s*[:=]\s*["']?[A-Za-z0-9_\-.]{20,}'''
+keywords = ["session", "credential"]
