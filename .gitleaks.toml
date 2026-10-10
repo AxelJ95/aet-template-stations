@@ -16,3 +16,11 @@ id = "session-code-or-run-credential"
 description = "A signed session code or run credential pasted into a file."
 regex = '''(?i)\b(?:session[_-]?code|run[_-]?credential)\s*[:=]\s*["']?[A-Za-z0-9_\-.]{20,}'''
 keywords = ["session", "credential"]
+
+[[allowlists]]
+description = "known fake age test vector in template history"
+commits = ["20ea9f90e03e21b18f63f074427d6d67b9c14132"]
+
+[[allowlists]]
+description = "stand-in AWS keys in installer tests and a PEM marker constant, rewritten at run time after these commits"
+commits = ["e652953f36ffe9095017a24b47f078d4a5a336bb", "a88da114f30a67e9c343c5e762e2871051f9f180"]

@@ -27,7 +27,7 @@ jobs:
           sha256sum -c - <<'PINNED'
           ccaeabab73784d39a5361af12aa94398b5c6b66e7a7c09d809b1ab52daa50735  .github/agent-ecosystem/check.mjs
           9f7327470659503f08598e7119cced430ffb5b3125c2c33fbbcec3e8e7b39387  .github/agent-ecosystem/index.mjs
-          85c854f667d72452f262441e9af68d08aec1def757ffedfd75613130b091236f  .gitleaks.toml
+          a4e2c84ddeea517e1cc27f6f1f924bcc50b3a30327adb0b9a2b7994a41fd5f47  .gitleaks.toml
           f961e21cbc088324c72c888367c60ac84248b5ea0ba9154d85cd5c9db9b75035  .yamllint.yaml
           PINNED
       - name: "Changed range"
@@ -74,6 +74,14 @@ jobs:
             description = "A signed session code or run credential pasted into a file."
             regex = '''(?i)\b(?:session[_-]?code|run[_-]?credential)\s*[:=]\s*["']?[A-Za-z0-9_\-.]{20,}'''
             keywords = ["session", "credential"]
+
+            [[allowlists]]
+            description = "known fake age test vector in template history"
+            commits = ["20ea9f90e03e21b18f63f074427d6d67b9c14132"]
+
+            [[allowlists]]
+            description = "stand-in AWS keys in installer tests and a PEM marker constant, rewritten at run time after these commits"
+            commits = ["e652953f36ffe9095017a24b47f078d4a5a336bb", "a88da114f30a67e9c343c5e762e2871051f9f180"]
         run: |
           status=0
           if [ -e .gitleaksignore ]; then
