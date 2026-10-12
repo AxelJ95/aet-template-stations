@@ -25,8 +25,8 @@ jobs:
         id: "verify"
         run: |
           sha256sum -c - <<'PINNED'
-          ccaeabab73784d39a5361af12aa94398b5c6b66e7a7c09d809b1ab52daa50735  .github/agent-ecosystem/check.mjs
-          9f7327470659503f08598e7119cced430ffb5b3125c2c33fbbcec3e8e7b39387  .github/agent-ecosystem/index.mjs
+          d8068cc19cc2380ba437b567f5c069499adc1d877cfe7b5163c62e516dacdf48  .github/agent-ecosystem/check.mjs
+          6c665347480234a6df936f05d509c5b7c1407280e3d43b225d4c36eae8782f6a  .github/agent-ecosystem/index.mjs
           a4e2c84ddeea517e1cc27f6f1f924bcc50b3a30327adb0b9a2b7994a41fd5f47  .gitleaks.toml
           f961e21cbc088324c72c888367c60ac84248b5ea0ba9154d85cd5c9db9b75035  .yamllint.yaml
           PINNED
