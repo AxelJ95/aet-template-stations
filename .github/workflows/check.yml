@@ -25,8 +25,8 @@ jobs:
         id: "verify"
         run: |
           sha256sum -c - <<'PINNED'
-          d8068cc19cc2380ba437b567f5c069499adc1d877cfe7b5163c62e516dacdf48  .github/agent-ecosystem/check.mjs
-          6c665347480234a6df936f05d509c5b7c1407280e3d43b225d4c36eae8782f6a  .github/agent-ecosystem/index.mjs
+          f5c254689f2cc69a352508a52a920c56f08664d3ee956e612184475b3953b898  .github/agent-ecosystem/check.mjs
+          067c75987a6e9ef1068745149a5cce97182df3cf3ae574a1dff01d5bfc00fc7b  .github/agent-ecosystem/index.mjs
           a4e2c84ddeea517e1cc27f6f1f924bcc50b3a30327adb0b9a2b7994a41fd5f47  .gitleaks.toml
           f961e21cbc088324c72c888367c60ac84248b5ea0ba9154d85cd5c9db9b75035  .yamllint.yaml
           PINNED
@@ -94,5 +94,5 @@ jobs:
           tar -xzf "$RUNNER_TEMP/gitleaks.tgz" -C "$RUNNER_TEMP" gitleaks
           : > "$RUNNER_TEMP/empty.gitleaksignore"
           if [ -n "$BASE" ]; then range="${BASE}..HEAD"; else range="HEAD"; fi
-          "$RUNNER_TEMP/gitleaks" git --no-banner --redact --exit-code 1 --ignore-gitleaks-allow --gitleaks-ignore-path "$RUNNER_TEMP/empty.gitleaksignore" --log-opts="$range" . || status=1
+          "$RUNNER_TEMP/gitleaks" git --no-banner --redact --exit-code 1 --ignore-gitleaks-allow --gitleaks-ignore-path "$RUNNER_TEMP/empty.gitleaksignore" --log-opts="--text --diff-merges=remerge $range" . || status=1
           exit "$status"
