@@ -24,3 +24,7 @@ commits = ["20ea9f90e03e21b18f63f074427d6d67b9c14132"]
 [[allowlists]]
 description = "stand-in AWS keys in installer tests and a PEM marker constant, rewritten at run time after these commits"
 commits = ["e652953f36ffe9095017a24b47f078d4a5a336bb", "a88da114f30a67e9c343c5e762e2871051f9f180"]
+
+[[allowlists]]
+description = "a stand-in mail key in the monitor installer test, built at run time after this commit"
+commits = ["e9c13a730251105ab051fbfa60106201df50d49b"]

@@ -25,9 +25,9 @@ jobs:
         id: "verify"
         run: |
           sha256sum -c - <<'PINNED'
-          08b4bcf45114f7f3b5b2bf3b0dd29f7485560db4a2dbfd8bbeec5ab8aaecd59d  .github/agent-ecosystem/check.mjs
-          f3a7607ad9c6211a20bf94d624b44718b49039542d591df52e636166dad09f3f  .github/agent-ecosystem/index.mjs
-          a4e2c84ddeea517e1cc27f6f1f924bcc50b3a30327adb0b9a2b7994a41fd5f47  .gitleaks.toml
+          c8de7f60b659e60f5703be75f90348981ac2c44cdd3b05ef29a81f2482839ae7  .github/agent-ecosystem/check.mjs
+          2baa9595590f8f13bf7d1a193ab1bf0e6183aa595076d9a1f6bb7239d1215380  .github/agent-ecosystem/index.mjs
+          a963e7140782be2e4043e440f81a3078fbbfb866f6c462f2fa238d46a910e46c  .gitleaks.toml
           f961e21cbc088324c72c888367c60ac84248b5ea0ba9154d85cd5c9db9b75035  .yamllint.yaml
           PINNED
       - name: "Changed range"
@@ -82,6 +82,10 @@ jobs:
             [[allowlists]]
             description = "stand-in AWS keys in installer tests and a PEM marker constant, rewritten at run time after these commits"
             commits = ["e652953f36ffe9095017a24b47f078d4a5a336bb", "a88da114f30a67e9c343c5e762e2871051f9f180"]
+
+            [[allowlists]]
+            description = "a stand-in mail key in the monitor installer test, built at run time after this commit"
+            commits = ["e9c13a730251105ab051fbfa60106201df50d49b"]
         run: |
           status=0
           if [ -e .gitleaksignore ]; then
