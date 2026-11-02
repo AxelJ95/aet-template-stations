@@ -28,3 +28,12 @@ commits = ["e652953f36ffe9095017a24b47f078d4a5a336bb", "a88da114f30a67e9c343c5e7
 [[allowlists]]
 description = "a stand-in mail key in the monitor installer test, built at run time after this commit"
 commits = ["e9c13a730251105ab051fbfa60106201df50d49b"]
+
+[[allowlists]]
+description = "the installer dry-run test's stand-in token fingerprint, only on its own line, in its own file, in the commit that added it"
+condition = "AND"
+targetRules = ["generic-api-key"]
+commits = ["262ba624b2dd680ae686f8dd097a313c531063cf"]
+paths = ['''^installer/test/dryrun\.test\.ts$''']
+regexTarget = "line"
+regexes = ['''(?m)^const TOKEN_FINGERPRINT = "[f]0e1d2c3b4a5"\.concat\("9"\.repeat\(52\)\);$''']

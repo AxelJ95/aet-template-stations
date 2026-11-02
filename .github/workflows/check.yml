@@ -35,7 +35,7 @@ jobs:
           sha256sum -c - <<'PINNED'
           41789f7a3e2d6394137efda09492ce45bf69d1b6531790d5ae04c2533854db39  .github/agent-ecosystem/check.mjs
           cfb14fc315a514742487b85e0b45822e41cdf19be9e32bfbc91f176b6b8d9e62  .github/agent-ecosystem/index.mjs
-          a963e7140782be2e4043e440f81a3078fbbfb866f6c462f2fa238d46a910e46c  .gitleaks.toml
+          85de8e359014a7ac3d32a8f96dbd8a10c01f0190266f5c2432eb784454fba601  .gitleaks.toml
           f961e21cbc088324c72c888367c60ac84248b5ea0ba9154d85cd5c9db9b75035  .yamllint.yaml
           PINNED
       - name: "Changed range"
@@ -101,6 +101,15 @@ jobs:
             [[allowlists]]
             description = "a stand-in mail key in the monitor installer test, built at run time after this commit"
             commits = ["e9c13a730251105ab051fbfa60106201df50d49b"]
+
+            [[allowlists]]
+            description = "the installer dry-run test's stand-in token fingerprint, only on its own line, in its own file, in the commit that added it"
+            condition = "AND"
+            targetRules = ["generic-api-key"]
+            commits = ["262ba624b2dd680ae686f8dd097a313c531063cf"]
+            paths = ['''^installer/test/dryrun\.test\.ts$''']
+            regexTarget = "line"
+            regexes = ['''(?m)^const TOKEN_FINGERPRINT = "[f]0e1d2c3b4a5"\.concat\("9"\.repeat\(52\)\);$''']
         run: |
           status=0
           if [ -e .gitleaksignore ]; then
