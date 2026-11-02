@@ -33,8 +33,8 @@ jobs:
         id: "verify"
         run: |
           sha256sum -c - <<'PINNED'
-          a3c77971556e90a69ad3cfc57453d8b1a8718b14bab0197378a7ea8898ee1633  .github/agent-ecosystem/check.mjs
-          9b6a350f69d587eac65b876dac71884087487460e9015cf95ac5a11b8c570e4d  .github/agent-ecosystem/index.mjs
+          41789f7a3e2d6394137efda09492ce45bf69d1b6531790d5ae04c2533854db39  .github/agent-ecosystem/check.mjs
+          cfb14fc315a514742487b85e0b45822e41cdf19be9e32bfbc91f176b6b8d9e62  .github/agent-ecosystem/index.mjs
           a963e7140782be2e4043e440f81a3078fbbfb866f6c462f2fa238d46a910e46c  .gitleaks.toml
           f961e21cbc088324c72c888367c60ac84248b5ea0ba9154d85cd5c9db9b75035  .yamllint.yaml
           PINNED
@@ -55,13 +55,16 @@ jobs:
         env:
           BASE: "${{ steps.range.outputs.base }}"
           REPO_NAME: "${{ github.event.repository.name }}"
+          GH_TOKEN: "${{ github.token }}"
         run: |
           REPO_NAME="${REPO_NAME:-${GITHUB_REPOSITORY#*/}}"
+          source=""
+          if answer="$(gh api "repos/$GITHUB_REPOSITORY" --jq '(.is_template == true) and (.template_repository == null)' 2>/dev/null)" && [ "$answer" = "true" ]; then source="--template-source"; fi
           command -v yamllint >/dev/null || pipx install yamllint
           if [ -n "$BASE" ]; then
-            node .github/agent-ecosystem/check.mjs --repo-name "$REPO_NAME" --base "$BASE" --head HEAD --yamllint
+            node .github/agent-ecosystem/check.mjs --repo-name "$REPO_NAME" $source --base "$BASE" --head HEAD --yamllint
           else
-            node .github/agent-ecosystem/check.mjs --repo-name "$REPO_NAME" --all --yamllint
+            node .github/agent-ecosystem/check.mjs --repo-name "$REPO_NAME" $source --all --yamllint
           fi
       - name: "Secret detection"
         if: "${{ always() }}"
