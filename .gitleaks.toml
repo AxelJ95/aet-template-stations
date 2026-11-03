@@ -37,3 +37,10 @@ commits = ["262ba624b2dd680ae686f8dd097a313c531063cf"]
 paths = ['''^installer/test/dryrun\.test\.ts$''']
 regexTarget = "line"
 regexes = ['''(?m)^const TOKEN_FINGERPRINT = "[f]0e1d2c3b4a5"\.concat\("9"\.repeat\(52\)\);$''']
+
+[[allowlists]]
+description = "a stand-in GitHub token in the agent-env poller test (E251), built at run time after these commits"
+condition = "AND"
+targetRules = ["github-app-token", "generic-api-key"]
+commits = ["682fe461279672b540b25dbfb3c8da82976caf94", "b9dbd4697d8e7b709cd0ee1961db27587fcba7cf"]
+paths = ['''^services/agent-env/test/poller\.test\.ts$''']

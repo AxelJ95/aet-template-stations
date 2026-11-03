@@ -35,7 +35,7 @@ jobs:
           sha256sum -c - <<'PINNED'
           41789f7a3e2d6394137efda09492ce45bf69d1b6531790d5ae04c2533854db39  .github/agent-ecosystem/check.mjs
           cfb14fc315a514742487b85e0b45822e41cdf19be9e32bfbc91f176b6b8d9e62  .github/agent-ecosystem/index.mjs
-          85de8e359014a7ac3d32a8f96dbd8a10c01f0190266f5c2432eb784454fba601  .gitleaks.toml
+          46ee0514d1bb2547a3ada4a6f8e2db8208f3db66a74c6b8fa28a4e2d57528c0a  .gitleaks.toml
           f961e21cbc088324c72c888367c60ac84248b5ea0ba9154d85cd5c9db9b75035  .yamllint.yaml
           PINNED
       - name: "Changed range"
@@ -110,6 +110,13 @@ jobs:
             paths = ['''^installer/test/dryrun\.test\.ts$''']
             regexTarget = "line"
             regexes = ['''(?m)^const TOKEN_FINGERPRINT = "[f]0e1d2c3b4a5"\.concat\("9"\.repeat\(52\)\);$''']
+
+            [[allowlists]]
+            description = "a stand-in GitHub token in the agent-env poller test (E251), built at run time after these commits"
+            condition = "AND"
+            targetRules = ["github-app-token", "generic-api-key"]
+            commits = ["682fe461279672b540b25dbfb3c8da82976caf94", "b9dbd4697d8e7b709cd0ee1961db27587fcba7cf"]
+            paths = ['''^services/agent-env/test/poller\.test\.ts$''']
         run: |
           status=0
           if [ -e .gitleaksignore ]; then
