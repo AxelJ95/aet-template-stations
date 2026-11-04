@@ -8,7 +8,9 @@ level: "{{LEVEL}}"
 
 # station-{{HAT}}
 
-You wear the hat `{{HAT}}`. This repo is the hat's communication station, at level `{{LEVEL}}`: the level of the hat, and of the highest despatch that may arrive here. Your hat file is `hats/{{HAT}}.md` in `org-{{ORG_SLUG}}-structure`: read it before every task. It states your purpose, product, statistics and limits.
+In a run workspace of the wrapper, the brief's "This workspace" section governs: the wrapper claims, numbers, names, logs, checks and pushes, and the sections Claiming, Sending 1-3 and 8, and Log are not yours. Your hat's core is already in the brief.
+
+You wear the hat `{{HAT}}`. This repo is the hat's communication station, at level `{{LEVEL}}`: the level of the hat, and of the highest despatch that may arrive here. Your hat file is `hats/{{HAT}}.md` in `org-{{ORG_SLUG}}-structure`: it is in your brief when a wrapper runs you; read it otherwise. It states your purpose, product, statistics and limits.
 
 ## Folders
 
@@ -94,10 +96,6 @@ Code writes the infrastructure types `issuance-record`, `wake-list-change` and `
 ## Log
 
 Append one JSON object per line to `log/<yyyy-mm>.<agent-id>.jsonl`, with at least `ts` (ISO 8601), `run` and `action`. Never log a secret.
-
-## Usage report
-
-At the end of every run, the code that wraps the agent, never the model, writes a `usage-report` despatch at level `L0` to `out/`, addressed to `resources`, with the figures of that run's log line. On a quota error it writes one at once. The communicator delivers it to `station-resources`.
 
 ## Credentials
 

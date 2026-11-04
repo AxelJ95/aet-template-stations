@@ -35,7 +35,7 @@ jobs:
           sha256sum -c - <<'PINNED'
           41789f7a3e2d6394137efda09492ce45bf69d1b6531790d5ae04c2533854db39  .github/agent-ecosystem/check.mjs
           cfb14fc315a514742487b85e0b45822e41cdf19be9e32bfbc91f176b6b8d9e62  .github/agent-ecosystem/index.mjs
-          46ee0514d1bb2547a3ada4a6f8e2db8208f3db66a74c6b8fa28a4e2d57528c0a  .gitleaks.toml
+          01f4ec8111a73c5fc8e08aa389dbad76f133867e249b1783e6b57be081e2e0cf  .gitleaks.toml
           f961e21cbc088324c72c888367c60ac84248b5ea0ba9154d85cd5c9db9b75035  .yamllint.yaml
           PINNED
       - name: "Changed range"
@@ -117,6 +117,13 @@ jobs:
             targetRules = ["github-app-token", "generic-api-key"]
             commits = ["682fe461279672b540b25dbfb3c8da82976caf94", "b9dbd4697d8e7b709cd0ee1961db27587fcba7cf"]
             paths = ['''^services/agent-env/test/poller\.test\.ts$''']
+
+            [[allowlists]]
+            description = "the communicator's stand-in installation token in the agent-env end-to-end test, built at run time after this commit"
+            condition = "AND"
+            targetRules = ["generic-api-key"]
+            commits = ["de0549ecb57aef1b6ead13c939a742980011c892"]
+            paths = ['''^services/agent-env/test/support/bare-github\.ts$''']
         run: |
           status=0
           if [ -e .gitleaksignore ]; then

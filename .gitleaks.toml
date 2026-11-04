@@ -44,3 +44,10 @@ condition = "AND"
 targetRules = ["github-app-token", "generic-api-key"]
 commits = ["682fe461279672b540b25dbfb3c8da82976caf94", "b9dbd4697d8e7b709cd0ee1961db27587fcba7cf"]
 paths = ['''^services/agent-env/test/poller\.test\.ts$''']
+
+[[allowlists]]
+description = "the communicator's stand-in installation token in the agent-env end-to-end test, built at run time after this commit"
+condition = "AND"
+targetRules = ["generic-api-key"]
+commits = ["de0549ecb57aef1b6ead13c939a742980011c892"]
+paths = ['''^services/agent-env/test/support/bare-github\.ts$''']
